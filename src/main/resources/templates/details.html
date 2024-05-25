@@ -14,6 +14,10 @@
         <ul>
             <li th:text="${user.name}"></li>
             <li th:text="${user.lastname}"></li>
+            <!-- Formas para usar la condicion If en Thymeleaf -->
+            <li th:if="${user.email} != null" th:text="${user.email}"></li>
+            <li th:if="!${user.email}" th:text="${'No tiene email'}"></li>
+            <!-- Formas para usar la condicion If en Thymeleaf -->
         </ul>
     </body>
 </html>
