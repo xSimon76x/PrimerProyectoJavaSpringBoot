@@ -1,9 +1,13 @@
 package com.simon.curso.springboot.webapp.springbootweb.controllers;
 
+import java.util.ArrayList;
+// import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.simon.curso.springboot.webapp.springbootweb.models.User;
@@ -32,6 +36,21 @@ public class UserController {
         model.put("lastname", "Bustamante");
 
         return "details";
+    }
+
+    @GetMapping("/list")   
+    public String list(ModelMap model){
+        
+        List<User> users = new ArrayList<>();
+        
+        // Se agrega un usuario
+        // User user1 = new User("simon", "bustamante");
+        // users.add(user1);
+
+        model.addAttribute("users", users);
+        model.addAttribute("title", "Listado de usuarios");
+
+        return "list";
     }
 
 }

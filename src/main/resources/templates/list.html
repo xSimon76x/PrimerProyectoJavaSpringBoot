@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="${title}"></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <!-- Los template solo deben usar los parametros que le llegan a este mismo -->
+    <!-- sino causara un error al no poder mostrar la plantilla en la ruta -->
+
+    <h1 th:if="${users.size() == 0}" th:text="${'No tiene elementos de usuarios!'}"></h1>
+    
+    <div th:if="${users.size() > 0}">Tiene elementos de usuarios!</div>
+    <div th:if="${users.name != ''}">Tiene elementos de usuarios!</div>
+
+</body>
+</html>
