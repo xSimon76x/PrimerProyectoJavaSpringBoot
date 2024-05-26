@@ -1,7 +1,7 @@
 package com.simon.curso.springboot.webapp.springbootweb.controllers;
 
 import java.util.ArrayList;
-// import java.util.Arrays;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -42,11 +42,15 @@ public class UserController {
     public String list(ModelMap model){
         
         List<User> users = new ArrayList<>();
-        
+
+        for (int i = 0; i < 3; i++) {
+            users.add(new User("simon"+i, "bustamante"+i, "sb"+i+"@gmail.com"));
+        }
+        users.add(new User("andres", "panza"));
         // Se agrega un usuario
         // User user1 = new User("simon", "bustamante");
         // users.add(user1);
-
+    
         model.addAttribute("users", users);
         model.addAttribute("title", "Listado de usuarios");
 

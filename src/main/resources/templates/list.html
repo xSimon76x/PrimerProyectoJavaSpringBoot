@@ -12,9 +12,33 @@
     <!-- Los template solo deben usar los parametros que le llegan a este mismo -->
     <!-- sino causara un error al no poder mostrar la plantilla en la ruta -->
 
-    <h1 th:if="${users.size() == 0}" th:text="${'No tiene elementos de usuarios!'}"></h1>
+    <h1 th:if="${users.isEmpty()}" th:text="${'No tiene elementos de usuarios!'}"></h1>
     
     <div th:if="${users.size() > 0}">Tiene elementos de usuarios!</div>
+
+    <table th:if="${users.size() > 0}">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellido
+                </th>
+                <th>
+                    Email
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user: ${users}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.lastname}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:if="${user.email==null}" th:text="${'No tiene email'}"></td>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>
