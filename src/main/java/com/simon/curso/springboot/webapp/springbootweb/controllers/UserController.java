@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.simon.curso.springboot.webapp.springbootweb.models.User;
 
@@ -41,20 +42,30 @@ public class UserController {
     @GetMapping("/list")   
     public String list(ModelMap model){
         
+        
+        // Se agrega un usuario
+        // User user1 = new User("simon", "bustamante");
+        // users.add(user1);
+    
+        // model.addAttribute("users", users);
+        model.addAttribute("title", "Listado de usuarios");
+
+        return "list";
+    }
+
+    //users: esta variable es la usada en el template list.html
+    //de esta forma puedo reutilizar esta misma variable en otro tempalte
+    @ModelAttribute("users")
+    public List<User> usersModel() {
+
         List<User> users = new ArrayList<>();
 
         for (int i = 0; i < 3; i++) {
             users.add(new User("simon"+i, "bustamante"+i, "sb"+i+"@gmail.com"));
         }
         users.add(new User("andres", "panza"));
-        // Se agrega un usuario
-        // User user1 = new User("simon", "bustamante");
-        // users.add(user1);
-    
-        model.addAttribute("users", users);
-        model.addAttribute("title", "Listado de usuarios");
 
-        return "list";
+        return users;
     }
 
 }
