@@ -12,12 +12,15 @@
 </head>
 <body>
     <div>
+        <h1 th:text="${users}"></h1>
         <p th:text="${datos}">Hola Mundo Spring Boot</p>
         <p>${name}</p>
         <ul>
             <li th:text="${name}"></li>
             <li th:text="${lastname}"></li>
             <li th:text="${user.lastname}"></li>
+            <li th:if="${user.email != null}" th:text="${user.email}"></li>
+            <li th:if="${ not (user.email != null)}" th:text="${'no tiene email'}"></li>
         </ul>
     </div>
 </body>
