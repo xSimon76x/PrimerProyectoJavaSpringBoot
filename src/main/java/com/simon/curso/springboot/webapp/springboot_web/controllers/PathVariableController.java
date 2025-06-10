@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +42,15 @@ public class PathVariableController {
     //convertir a string manual
     @Value("#{ '${config.listOfValue}' }")
     private String valueString;
+
+    @Value("#{ ${config.valuesMap} }")
+    private Map<String, String> valuesMap;
+
+    @Value("#{ ${config.valuesMap}.product }")
+    private String product;
+
+    @Autowired
+    private Environment environment; 
     
     @GetMapping("/baz/{message}")
     public ParamDto baz(@PathVariable String message) {
@@ -83,10 +94,15 @@ public class PathVariableController {
         Map<String, Object> json = new HashMap<>();
         json.put("username", username);
         json.put("message", menssage);
+        json.put("message2", environment.getProperty("config.menssage"));
+        json.put("code2", Integer.valueOf(environment.getProperty("config.code")));
+        json.put("code3", environment.getProperty("config.code", Integer.class));
         json.put("listOfValue", listOfValue);
         json.put("code", code);
         json.put("valueList", valueList);
         json.put("valueString", valueString);
+        json.put("valuesMap", valuesMap);
+        json.put("product", product);
 
         return json;
     }
