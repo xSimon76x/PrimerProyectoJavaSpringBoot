@@ -15,7 +15,7 @@ import com.simon.curso.springboot.webapp.springboot_web.models.User;
 import com.simon.curso.springboot.webapp.springboot_web.models.dto.UserDto;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserRestController {
 
     @GetMapping("/details")

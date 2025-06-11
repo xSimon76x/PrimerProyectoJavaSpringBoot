@@ -2,12 +2,18 @@ package com.simon.curso.springboot.webapp.springboot_web.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.HandlerMapping;
 
 import com.simon.curso.springboot.webapp.springboot_web.models.dto.ParamDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -44,15 +50,34 @@ public class RequestParamsController {
         return param;
     }
 
-    @GetMapping("/all-params")
-    public ParamDto bar( HttpServletRequest req) 
+    @GetMapping("/all-params/{edad}")
+    public ResponseEntity<?> bar( HttpServletRequest req, @PathVariable String edad) 
     {
         // /all-params?meg=hola&code=2
-        ParamDto param = new ParamDto();
-        param.setMessage(req.getParameter("meg"));
-        param.setCode(Integer.parseInt(req.getParameter("code")));
+        // ParamDto param = new ParamDto();
+        // param.setMessage(req.getParameter("meg"));
+        // param.setCode(Integer.parseInt(req.getParameter("code")));
 
-        return param;
+        // return param;
+
+        //Combinar en un objeto de salida, las PathVariables y lo del requestBody
+        Map<String, String> pathVars = (Map<String, String>) req.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+
+        Map<String, String[]> paramMap = req.getParameterMap();
+
+        Map<String, String> combined = new HashMap<>();
+
+        if (pathVars != null) {
+            combined.putAll(pathVars);
+        }
+
+        for (Map.Entry<String, String[]> entry : paramMap.entrySet()) {
+            // Si hay múltiples valores, los unes con coma
+            combined.put(entry.getKey(), String.join(",", entry.getValue()));
+        }
+
+
+        return ResponseEntity.ok(combined);
     }
     
 }
