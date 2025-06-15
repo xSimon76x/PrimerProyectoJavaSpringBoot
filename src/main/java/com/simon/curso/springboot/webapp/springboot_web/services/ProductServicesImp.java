@@ -1,4 +1,4 @@
-package com.simon.curso.springboot.webapp.springboot_web.repositories;
+package com.simon.curso.springboot.webapp.springboot_web.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,15 +9,17 @@ import com.simon.curso.springboot.webapp.springboot_web.models.Product;
 // para implementar la logica de negocio, luego de hacer X accion (GET,PUT, etc)
 // que se definicion en el repository, y que esta entrega un resultado
 // que puede ser moldeado en el service 
-public class ProductServices {
+public class ProductServicesImp  implements ProductServices{
 
-    private ProductRepository repository = new ProductRepository();
+    private ProductServicesImp repository = new ProductServicesImp();
 
     public List<Product> findAll() {
         return repository.findAll().stream().map( x -> {
             Double priceImp = x.getPrice() * 1.25d;
-            x.setPrice(priceImp.longValue());
-            return x;
+            Product newProd = (Product) x.clone();
+            newProd.setPrice(priceImp.longValue());
+
+            return newProd;
         }).collect(Collectors.toList());
     }
 

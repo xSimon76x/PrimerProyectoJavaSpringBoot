@@ -1,6 +1,6 @@
 package com.simon.curso.springboot.webapp.springboot_web.models;
 
-public class Product {
+public class Product implements Cloneable {
 
     private Long id;
     private String name;
@@ -32,5 +32,16 @@ public class Product {
         this.price = price;
     }
 
-
+  @Override
+  public Object clone() {
+    // Para evitar que sea mutable el Product
+    // Clona el objeto y se usa despues para hacer acciones, para evitar que cualquier cambio
+    // quede en memoria
+      try {
+        return super.clone();
+      } catch (CloneNotSupportedException e) {
+        // TODO: handle exception
+        return new Product(id, name, price);
+      }
+  }
 }
