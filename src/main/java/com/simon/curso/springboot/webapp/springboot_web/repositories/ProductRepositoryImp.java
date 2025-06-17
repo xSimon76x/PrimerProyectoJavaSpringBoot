@@ -3,11 +3,11 @@ package com.simon.curso.springboot.webapp.springboot_web.repositories;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.simon.curso.springboot.webapp.springboot_web.models.Product;
 
-@Component
+@Repository
 public class ProductRepositoryImp implements ProductRepository{
 
     private List<Product> data;

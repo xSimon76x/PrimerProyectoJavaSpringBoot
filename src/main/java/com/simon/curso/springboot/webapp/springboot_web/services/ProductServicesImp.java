@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.simon.curso.springboot.webapp.springboot_web.models.Product;
 import com.simon.curso.springboot.webapp.springboot_web.repositories.ProductRepository;
@@ -13,7 +13,7 @@ import com.simon.curso.springboot.webapp.springboot_web.repositories.ProductRepo
 // para implementar la logica de negocio, luego de hacer X accion (GET,PUT, etc)
 // que se definicion en el repository, y que esta entrega un resultado
 // que puede ser moldeado en el service 
-@Component
+@Service
 public class ProductServicesImp  implements ProductServices{
 
     @Autowired
