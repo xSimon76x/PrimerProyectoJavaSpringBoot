@@ -3,9 +3,11 @@ package com.simon.curso.springboot.webapp.springboot_web.repositories;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.simon.curso.springboot.webapp.springboot_web.models.Product;
+
 
 @Repository
 public class ProductRepositoryImp implements ProductRepository{
