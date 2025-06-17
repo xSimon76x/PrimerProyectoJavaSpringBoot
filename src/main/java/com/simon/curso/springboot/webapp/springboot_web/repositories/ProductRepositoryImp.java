@@ -3,8 +3,11 @@ package com.simon.curso.springboot.webapp.springboot_web.repositories;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.simon.curso.springboot.webapp.springboot_web.models.Product;
 
+@Component
 public class ProductRepositoryImp implements ProductRepository{
 
     private List<Product> data;
@@ -18,10 +21,12 @@ public class ProductRepositoryImp implements ProductRepository{
         );
     }
 
+    @Override
     public List<Product> findAll() {
         return data;
     }
 
+    @Override
     public Product findById(Long id) {
         // return data.stream().filter( x -> x.getId().equals(id)).findFirst().orElse(null);
         return data.stream().filter( x -> x.getId().equals(id)).findFirst().orElseThrow();
