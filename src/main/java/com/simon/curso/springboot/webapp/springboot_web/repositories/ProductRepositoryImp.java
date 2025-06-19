@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.simon.curso.springboot.webapp.springboot_web.models.Product;
 
-@RequestScope
+@RequestScope //? Sirve para definir el alcance del repository, en este caso es solo para esta peticion/request
+//@SessionScope //? Sirve para definir el alcance del repository, en este caso es solo para esta sesion, si se sale de la sesion se reinicia
 @Repository("productList")
 public class ProductRepositoryImp implements ProductRepository{
 
