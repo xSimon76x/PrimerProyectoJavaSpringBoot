@@ -10,7 +10,7 @@ import com.simon.curso.springboot.webapp.springboot_web.models.Product;
 
 // Solo puede haber un @Primary no pueden haber mas
 @Primary // Con esta anotacion se define como el repositorio primario a utilizar, y los demas quedan inutilizados si
-@Repository
+@Repository("productFoo")
 public class ProductRepositoryFoo implements ProductRepository{
 
 
