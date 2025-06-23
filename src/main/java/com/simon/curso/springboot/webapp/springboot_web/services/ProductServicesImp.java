@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.simon.curso.springboot.webapp.springboot_web.models.Product;
@@ -21,6 +22,9 @@ public class ProductServicesImp  implements ProductServices{
     @Qualifier("productList")
     private ProductRepository repository; // Con Autowired evitamos usar el '= new ProductServicesImp();'
 
+    @Autowired
+    private Environment environment;
+
     // En vez de considerar al Primary, se esta seleccionado la clase que es usada por dicha interfaz
     // En este caso ProductRepositoryImp
     //! El Qualifier no filtra por repository dentro de los parametros del constructor
@@ -31,7 +35,7 @@ public class ProductServicesImp  implements ProductServices{
     @Override
     public List<Product> findAll() {
         return repository.findAll().stream().map( x -> {
-            Double priceImp = x.getPrice() * 1.25d;
+            Double priceImp = x.getPrice() * environment.getProperty("config.price.tax", Double.class);
             Product newProd = (Product) x.clone();
             newProd.setPrice(priceImp.longValue());
             // x.setPrice(priceImp.longValue());
