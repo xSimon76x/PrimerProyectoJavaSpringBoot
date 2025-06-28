@@ -19,7 +19,7 @@ import com.simon.curso.springboot.webapp.springboot_web.repositories.ProductRepo
 public class ProductServicesImp  implements ProductServices{
 
     @Autowired
-    @Qualifier("productList")
+    @Qualifier("productRepositoryJson")
     private ProductRepository repository; // Con Autowired evitamos usar el '= new ProductServicesImp();'
 
     @Autowired
@@ -28,7 +28,7 @@ public class ProductServicesImp  implements ProductServices{
     // En vez de considerar al Primary, se esta seleccionado la clase que es usada por dicha interfaz
     // En este caso ProductRepositoryImp
     //! El Qualifier no filtra por repository dentro de los parametros del constructor
-    public ProductServicesImp( @Qualifier("productList") ProductRepository repository ) {
+    public ProductServicesImp(ProductRepository repository ) {
         this.repository = repository;
     }
 
